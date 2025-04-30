@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hustle Hub</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <header>
+    <img src="./Images/logo .webp" alt="Hustle Hub Logo" class="main_logo" />
+  </header>
+
+  <main>
+    <!-- Main Heading -->
+    <section aria-labelledby="main-heading">
+      <h2 id="main-heading" class="main_heading"></h2>
+      <h2 class="main_heading"></h2>
+    </section>
+
+    <!-- Shop Categories -->
+    <section aria-labelledby="shop-categories">
+      <h2 id="shop-categories" class="sr-only">Shop Categories</h2>
+      <div class="container">
+        <template id="shop-item-template">
+          <a href="#" class="shop-item">
+            <img src="" alt="" />
+            <span></span>
+          </a>
+        </template>
+      </div>
+    </section>
+
+    <!-- Customer Support Section -->
+    <section aria-labelledby="why-shop">
+      <h1 id="why-shop"></h1>
+      <ul class="benefits">
+        <template id="benefit-item-template">
+          <li class="benefit-item">
+            <h2></h2>
+            <p></p>
+          </li>
+        </template>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <a class="link footer-left" href="index2.html">Hustle Hub</a>
+      <nav aria-label="Social media links">
+        <ul class="footer-icons">
+          <li><a href=" " target="_blank"><i class="fa fa-facebook fa-2x"></i></a></li>
+          <li><a href=" " target="_blank"><i class="fa fa-instagram fa-2x"></i></a></li>
+          <li><a href=" " target="_blank"><i class="fa fa-youtube fa-2x"></i></a></li>
+        </ul>
+      </nav>
+      <a class="link footer-right" href="contact.html" target="_self">Contact Us</a>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2025 Hustle Hub LLC.</p>
+    </div>
+  </footer>
+
+  <script src="data/content.js"></script>
+  <script>
+    // Get the data from content.js
+    const data = pageData;
+
+    // Set the main heading and welcome message
+    document.querySelector('#main-heading').textContent = data.mainHeading;
+    document.querySelectorAll('.main_heading')[1].textContent = data.welcomeMessage;
+
+    // Add shop items
+    const shopContainer = document.querySelector('.container');
+    const shopItemTemplate = document.getElementById('shop-item-template');
+    data.shopCategories.forEach(category => {
+      const shopItem = shopItemTemplate.content.cloneNode(true);
+      shopItem.querySelector('a').href = category.link;
+      shopItem.querySelector('img').src = category.imageUrl;
+      shopItem.querySelector('img').alt = category.altText;
+      shopItem.querySelector('span').textContent = category.title;
+      shopContainer.appendChild(shopItem);
+    });
+
+    // Add customer support items
+    const benefitsList = document.querySelector('.benefits');
+    const benefitItemTemplate = document.getElementById('benefit-item-template');
+    data.customerSupport.forEach(item => {
+      const benefitItem = benefitItemTemplate.content.cloneNode(true);
+      benefitItem.querySelector('h2').textContent = item.title;
+      benefitItem.querySelector('p').textContent = item.description;
+      benefitsList.appendChild(benefitItem);
+    });
+  </script>
+
+</body>
+
+</html>
